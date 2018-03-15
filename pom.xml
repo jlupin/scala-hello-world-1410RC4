@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <name>scala-hello-world</name>
+    <artifactId>scala-hello-world-implementation</artifactId>
+    <groupId>com.example</groupId>
+    <version>1.0</version>
+
+    <properties>
+        <scala.version>2.11.8</scala.version>
+
+        <jlupin.next.server.maven.plugin.version>1.1.1</jlupin.next.server.maven.plugin.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>${scala.version}</version>
+        </dependency>
+    </dependencies>
+
+    <!--
+        Enable shade and JCS JLupin Next Server Maven Plugin for this module.
+        They are configured in main project pom.xml file.
+    -->
+    <build>
+        <finalName>scala-2.11/scala-hello-world_2.11-1.0</finalName>
+
+        <plugins>
+            <plugin>
+                <groupId>com.jlupin</groupId>
+                <artifactId>jlupin-next-server-maven-plugin</artifactId>
+                <version>${jlupin.next.server.maven.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>jlupin-zip</id>
+                        <goals>
+                            <goal>zip</goal>
+                        </goals>
+                        <configuration>
+                            <additionalFilesDirectories>
+                                <param>additional-files</param>
+                            </additionalFilesDirectories>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>jlupin-deploy</id>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
